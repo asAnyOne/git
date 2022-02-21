@@ -60,15 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>   
    `;
     });
-    document.querySelectorAll(".delete").forEach((btn, i) => {
-      btn.addEventListener("click", () => {
-        btn.parentElement.remove();
-        movieDB.movies.splice(i, 1);
-        createMovieList(films, parent);
-      });
-    });
+    // document.querySelectorAll(".delete").forEach((btn, i) => {
+    //   btn.addEventListener("click", () => {
+    //     btn.parentElement.remove();
+    //     movieDB.movies.splice(i, 1);
+    //     createMovieList(films, parent);
+    //   });
+    // });
   }
   createMovieList(movieDB.movies, movieList);
+  movieList.addEventListener("click", (e, i) => {
+    if (e.target && e.target.matches("div.delete")) {
+      e.target.parentElement.remove();
+      movieDB.movies.splice(i, 1);
+      createMovieList(movieDB.movies, movieList);
+    }
+  });
 
   const deleteAdv = (arr) => {
     arr.forEach((item) => {
